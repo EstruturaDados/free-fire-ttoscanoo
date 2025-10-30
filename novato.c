@@ -27,8 +27,6 @@ void pausarTela();
 void inserirItem();
 void removerItem();
 void listarItens();
-void buscarItem();
-
 
 // --- Função Principal ---
 
@@ -58,9 +56,6 @@ int main() {
                 listarItens();
                 pausarTela();
                 break;
-            case 4:
-                buscarItem();
-                break;
             case 0:
                 limparTela();
                 printf("Saindo do gerenciador de mochila... Ate logo!\n");
@@ -80,7 +75,6 @@ int main() {
 void limparTela() {
     system("clear");
 }
-
 
 void limparBufferEntrada() {
     int c;
@@ -102,7 +96,6 @@ void exibirMenu() {
     printf("1. Adicionar Item (Loot)\n");
     printf("2. Remover Item\n");
     printf("3. Listar Itens na Mochila\n");
-    printf("4. Buscar Item por Nome\n");
     printf("0. Sair\n");
     printf("-------------------------------------------\n");
     printf("Escolha uma opcao: ");
@@ -180,7 +173,6 @@ void removerItem() {
     pausarTela();
 }
 
-
 void listarItens() {
     limparTela(); 
     printf("==================================================\n");
@@ -201,44 +193,4 @@ void listarItens() {
         }
     }
     printf("==================================================\n");
-}
-
-void buscarItem() {
-    limparTela(); 
-    printf("--- Buscar Item por Nome ---\n");
-
-    if (numItens == 0) {
-        printf("Mochila vazia. Nada para buscar.\n");
-        pausarTela();
-        return;
-    }
-
-    char nomeBusca[30];
-    printf("Digite o nome do item a buscar: ");
-    scanf(" %s", nomeBusca);
-    limparBufferEntrada();
-
-    int indiceEncontrado = -1;
-
-    for (int i = 0; i < numItens; i++) {
-        if (strcmp(mochila[i].nome, nomeBusca) == 0) {
-            indiceEncontrado = i;
-            break;
-        }
-    }
-
-    if (indiceEncontrado == -1) {
-        printf("\nItem '%s' nao encontrado na mochila.\n", nomeBusca);
-    } else {
-        printf("\nItem encontrado!\n");
-        printf("--------------------------------------------------\n");
-        printf("%-30s | %-20s | %s\n", "NOME", "TIPO", "QTD.");
-        printf("--------------------------------------------------\n");
-        printf("%-30s | %-20s | %d\n", 
-            mochila[indiceEncontrado].nome, 
-            mochila[indiceEncontrado].tipo, 
-            mochila[indiceEncontrado].quantidade);
-    }
-    
-    pausarTela();
 }
